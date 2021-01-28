@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1444170494220688236}
   - component: {fileID: 2025513887188823816}
   - component: {fileID: 6053573610399852663}
+  - component: {fileID: 4360165035037595840}
   m_Layer: 8
   m_Name: EnemyOne
   m_TagString: Untagged
@@ -133,3 +134,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4360165035037595840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8305445134536033874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 680266a1a755c12469d332e433e47922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  health: 10
+  moveSpeed: 10
+  from: 0
+  destination: {x: 0, y: 0, z: 0}

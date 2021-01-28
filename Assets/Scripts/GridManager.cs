@@ -17,10 +17,9 @@ public class GridManager : MonoBehaviour
         {Direction.SOUTH, new Vector3Int(0, -1, 0)},
         {Direction.WEST, new Vector3Int(-1, 0, 0)}
     };
-
-
-    // Tehdään Singleton -muuttuja
-    public static GridManager instance;
+    
+// Tehdään Singleton -muuttuja
+public static GridManager instance;
 
     private void Awake()
     {

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Enemy
+public class Enemy: MonoBehaviour
 {
-    public Transform transform;
     public float level, health, moveSpeed;
     // Pidetään yllä tietoa, _mistä_ suunnasta ollaan kävelemässä
     [HideInInspector] public Direction from;
