@@ -23,8 +23,11 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(mapSize.x / 2 * cellSize,
                                          mapSize.y / 2 * cellSize,
                                          -10f);
-        // Asetetaan mapEnd -muuttujan arvoksi kartan koko kerrottuna yhen tilen koko
+        // Width muuttujaan haetaan kameran poulikas koko vaakasuunnassa. Kameran koko
+        // pystysuunnassa (puolikas) löytyy muuttujasta cam.orthographicSize
         float width = cam.orthographicSize * Screen.width / Screen.height;
+
+        // Asetetaan mapEnd -muuttujan arvoksi kartan koko kerrottuna yhen tilen koko
         mapStart = new Vector2(width, cam.orthographicSize);
         mapEnd = new Vector2(mapSize.x * cellSize - width, 
                              mapSize.y * cellSize - cam.orthographicSize);
@@ -53,11 +56,12 @@ public class CameraController : MonoBehaviour
         {
             transform.position += Vector3.up * speed * Time.deltaTime;
         }
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, mapStart.x, mapEnd.x),
-                                         Mathf.Clamp(transform.position.y, mapStart.y, mapEnd.y),
-                                         -10f);
 
-
+        // Käytetään Mathf.Clamp metodia pitämään kameran x ja y koordinaatit
+        // pelikentän rajoissa.
+           transform.position = new Vector3(Mathf.Clamp(transform.position.x, mapStart.x, mapEnd.x),
+                                            Mathf.Clamp(transform.position.y, mapStart.y, mapEnd.y),
+                                            -10f);
     }
 }
 
