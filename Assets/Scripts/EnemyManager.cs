@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,12 +27,12 @@ public class EnemyManager : MonoBehaviour
     {
         levelData = FindObjectOfType<LevelData>();
         endPointCell = GridManager.instance.WorldToRoadCell(levelData.endPoint.position);
-        activeEnemies.Add(Instantiate(enemies[0], levelData.spawnPoint.position, Quaternion.identity));
-        SetDestination(activeEnemies[0]);
     }
 
     private void Update()
     {
+        // Katsotaan onko mahdollista spawnata uusi vihollinen
+        SpawnEnemies();
         // Käydään kaikki viholliset läpi, jotka ovat vielä elossa
         for (int i = 0; i < activeEnemies.Count; i++)
         {
@@ -48,6 +49,26 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void SpawnEnemies()
+    {
+        // Jos maksimäärä vihollisia on spawnattu, niin ei spawnata niitä enempää
+        if (levelData.maxEnemies <= 0)
+        {
+            return;
+        }
+        // Jos edellisestä spawnista on kulunut spawnIntervalin määrämä aika,
+        // niin spawnataan uusi vihollinen.
+        if (Time.time >= levelData.spawnTime)
+        {
+            levelData.spawnTime = Time.time + levelData.spawnInterval;
+            levelData.maxEnemies--;
+            int index = UnityEngine.Random.Range(0, enemies.Length);
+            Enemy enemy = Instantiate(enemies[index], levelData.spawnPoint.position, Quaternion.identity);
+            activeEnemies.Add(enemy);
+            SetDestination(enemy);
+        }
+    }
+
     private void SetDestination(Enemy enemy)
     {
         // Muutetaan vihollisen positio tilemap koordinaateiksi.
@@ -59,8 +80,22 @@ public class EnemyManager : MonoBehaviour
             Destroy(enemy.gameObject);
             Debug.Log("Vihollinen pääsi loppuun asti");
         }
+
         // Päivitetään liikkumissuunta
         Direction dir = GridManager.instance.PathDirection(cell, enemy.from);
+        // Jos vihollisen tämän hetkisen ruudun kohdalla on "ForceDirection" komponentti,
+        // annetaan ForceDirectionin määrätä suunta. Tämä sitä varten, että vältetään
+        // vihollisten tyhmä käyttäytyminen.
+        foreach (ForceDirection fd in levelData.forceDirections)
+        {
+            if (cell == fd.cellPosition)
+            {
+                int index = UnityEngine.Random.Range(0, fd.directions.Length);
+                dir = fd.directions[index];
+                Debug.Log("Force Direction muutti suunnaksi " + dir);
+            }
+        }
+      
         // Päivitetään vihollisen tulosuunta seuraavaa liikkumissuuntaa varten
         enemy.from = ReverseDirection[dir];
         // Muutetaan tilemapista tulevat koordinaatit Unity -maailman koordinaateiksi

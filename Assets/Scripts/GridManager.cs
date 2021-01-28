@@ -35,6 +35,11 @@ public static GridManager instance;
         cellSize = GetComponent<Grid>().cellSize.x;
     }
 
+    public Vector3Int WorldToBGCell(Vector3 worldPos)
+    {
+        return bgMap.WorldToCell(worldPos);
+    }
+
     public Vector3Int WorldToRoadCell(Vector3 worldPos)
     {
         return roadMap.WorldToCell(worldPos);

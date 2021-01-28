@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float marginX = 100f, marginY = 100f, speed = 5f;
     private Vector2 mapStart, mapEnd;
-    private Camera cam;  
-    
+    private Camera cam;
+    [SerializeField] private bool buildingMode;
+
     private void Awake()
     {
         cam = GetComponent<Camera>();
@@ -35,6 +37,22 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        HandleScrolling();
+        if (buildingMode)
+        {
+            HandleBuilding();
+        }
+    }
+
+    private void HandleBuilding()
+    {
+        Vector3 worldPos = cam.ScreenToWorldPoint(Input.mousePosition);
+        Vector3Int cellPos = GridManager.instance.WorldToBGCell(worldPos);
+        Debug.Log(cellPos);
+    }
+
+    private void HandleScrolling()
+    {
         Vector2 mPos = Input.mousePosition;
         // Tarkistetaan onko hiiren kursori vasemmalla puolella ruutua.
         if (mPos.x < marginX)
@@ -59,9 +77,9 @@ public class CameraController : MonoBehaviour
 
         // Käytetään Mathf.Clamp metodia pitämään kameran x ja y koordinaatit
         // pelikentän rajoissa.
-           transform.position = new Vector3(Mathf.Clamp(transform.position.x, mapStart.x, mapEnd.x),
-                                            Mathf.Clamp(transform.position.y, mapStart.y, mapEnd.y),
-                                            -10f);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, mapStart.x, mapEnd.x),
+                                         Mathf.Clamp(transform.position.y, mapStart.y, mapEnd.y),
+                                         -10f);
     }
 }
 
