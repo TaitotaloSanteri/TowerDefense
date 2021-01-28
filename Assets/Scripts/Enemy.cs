@@ -7,4 +7,16 @@ public class Enemy
 {
     public Transform transform;
     public float level, health, moveSpeed;
+    // Pidetään yllä tietoa, _mistä_ suunnasta ollaan kävelemässä
+    [HideInInspector] public Direction from;
+    // Pidetään yllä tietoa, _mihin_ suuntaan ollaan kävelemässä
+    [HideInInspector] public Vector3 destination;
+}
+
+public enum Direction
+{
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST
 }
