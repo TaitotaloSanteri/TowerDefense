@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private Tilemap bgMap, roadMap;    
+    [SerializeField] private Tilemap bgMap, roadMap, treeMap;    
     [HideInInspector] public Vector2Int mapSize;
     [HideInInspector] public float cellSize;
 
@@ -38,6 +38,16 @@ public static GridManager instance;
     public Vector3Int WorldToBGCell(Vector3 worldPos)
     {
         return bgMap.WorldToCell(worldPos);
+    }
+
+    public bool IsValidBuildingLocation(Vector3Int cellPos)
+    {
+        return !roadMap.HasTile(cellPos) && !treeMap.HasTile(cellPos);
+    }
+
+    public Vector3 IndicatorPosition(Vector3Int cellPos)
+    {
+        return bgMap.GetCellCenterWorld(cellPos);
     }
 
     public Vector3Int WorldToRoadCell(Vector3 worldPos)

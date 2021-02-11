@@ -7,19 +7,23 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField]
     private float marginX = 100f, marginY = 100f, speed = 5f;
-    private Vector2 mapStart, mapEnd;
-    private Camera cam;
+    [HideInInspector] public Vector2 mapStart, mapEnd, mapSize;
+    [HideInInspector] public Camera cam;
+    [HideInInspector] public float cellSize;
     [SerializeField] private bool buildingMode;
+    private BuildingController buildingController;
 
     private void Awake()
     {
         cam = GetComponent<Camera>();
+        buildingController = GetComponent<BuildingController>();
+        buildingMode = true;
     }
 
     void Start()
     {
-        Vector2 mapSize = GridManager.instance.mapSize;
-        float cellSize = GridManager.instance.cellSize;
+        mapSize = GridManager.instance.mapSize;
+        cellSize = GridManager.instance.cellSize;
 
         // Asetetaan kameran aloituspositio keskelle pelikenttää
         transform.position = new Vector3(mapSize.x / 2 * cellSize,
@@ -40,15 +44,8 @@ public class CameraController : MonoBehaviour
         HandleScrolling();
         if (buildingMode)
         {
-            HandleBuilding();
+            buildingController.HandleBuilding(cam);
         }
-    }
-
-    private void HandleBuilding()
-    {
-        Vector3 worldPos = cam.ScreenToWorldPoint(Input.mousePosition);
-        Vector3Int cellPos = GridManager.instance.WorldToBGCell(worldPos);
-        Debug.Log(cellPos);
     }
 
     private void HandleScrolling()
