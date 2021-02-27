@@ -277,8 +277,8 @@ GameObject:
   - component: {fileID: 981134720315837911}
   - component: {fileID: 981134720315837906}
   - component: {fileID: 981134720315837909}
-  - component: {fileID: 981134720315837908}
   - component: {fileID: 7210808822937873972}
+  - component: {fileID: 2833827227243140491}
   m_Layer: 5
   m_Name: TowerButton
   m_TagString: Untagged
@@ -344,7 +344,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &981134720315837908
+--- !u!114 &7210808822937873972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981134720315837910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de5a4b081b9cd44a9a333293111fdb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerName: {fileID: 981134719059306580}
+  towerCost: {fileID: 981134719018668397}
+--- !u!114 &2833827227243140491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -387,17 +401,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7210808822937873972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981134720315837910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6de5a4b081b9cd44a9a333293111fdb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towerName: {fileID: 981134719059306580}
-  towerCost: {fileID: 981134719018668397}

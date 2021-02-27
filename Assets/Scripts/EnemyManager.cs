@@ -78,7 +78,6 @@ public class EnemyManager : MonoBehaviour
         {
             activeEnemies.Remove(enemy);
             Destroy(enemy.gameObject);
-            Debug.Log("Vihollinen pääsi loppuun asti");
         }
 
         // Päivitetään liikkumissuunta
@@ -92,7 +91,6 @@ public class EnemyManager : MonoBehaviour
             {
                 int index = UnityEngine.Random.Range(0, fd.directions.Length);
                 dir = fd.directions[index];
-                Debug.Log("Force Direction muutti suunnaksi " + dir);
             }
         }
       

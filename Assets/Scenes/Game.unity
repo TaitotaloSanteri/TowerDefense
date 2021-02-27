@@ -1556,6 +1556,7 @@ MonoBehaviour:
     type: 3}
   scriptableTowers: []
   towerButtons: []
+  gr: {fileID: 1758223171}
 --- !u!1 &1791082216
 GameObject:
   m_ObjectHideFlags: 0
