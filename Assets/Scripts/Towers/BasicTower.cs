@@ -8,8 +8,14 @@ public class BasicTower : BaseTower
     {
         CheckForNewTarget();
         if (!currentTarget) return;
+
         Vector3 direction = currentTarget.transform.position - towerCannon.position;
         towerCannon.up = direction;
+        if (Time.time > nextShotTime)
+        {
+            SpawnAmmo();
+        }
+    
     }
 
     protected override void Idle()

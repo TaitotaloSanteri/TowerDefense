@@ -22,11 +22,30 @@ public class EnemyManager : MonoBehaviour
         {Direction.WEST, Direction.EAST }
     };
     private List<Enemy> activeEnemies = new List<Enemy>();
+    public static EnemyManager instance;
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     private void Start()
     {
         levelData = FindObjectOfType<LevelData>();
         endPointCell = GridManager.instance.WorldToRoadCell(levelData.endPoint.position);
+    }
+
+    public void TakeDamage(Enemy enemy, float damage)
+    {
+        if (!enemy) return; 
+        enemy.health -= damage;
+        if (enemy.health <= 0)
+        {
+            activeEnemies.Remove(enemy);
+            Destroy(enemy.gameObject);
+        }
     }
 
     private void Update()

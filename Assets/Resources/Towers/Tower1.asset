@@ -17,7 +17,8 @@ MonoBehaviour:
   size: {x: 1, y: 1}
   towerPrefab: {fileID: 7400235266134842219, guid: c2aab76f5d30b2249a9e851c040ab51b,
     type: 3}
-  fireRate: 0
-  damage: 0
+  fireRate: 0.8
+  ammoDamage: 3
+  ammoSpeed: 30
   rotationSpeed: -50
-  range: 4.5
+  range: 9

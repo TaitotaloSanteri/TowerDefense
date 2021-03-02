@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ammo
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -46,6 +48,9 @@ TagManager:
     locked: 0
   - name: Tower
     uniqueID: 658115607
+    locked: 0
+  - name: Ammo
+    uniqueID: 2166993517
     locked: 0
   - name: Indicator
     uniqueID: 2158248409

@@ -132,6 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerStats: {fileID: 0}
   towerCannon: {fileID: 7400235266579976819}
+  rangeCollider: {fileID: 7583963361834467003}
+  ammoPrefab: {fileID: 1637143949575012061, guid: 39651d9a9c5d190429d9b9163730198b,
+    type: 3}
 --- !u!58 &7583963361834467003
 CircleCollider2D:
   m_ObjectHideFlags: 0

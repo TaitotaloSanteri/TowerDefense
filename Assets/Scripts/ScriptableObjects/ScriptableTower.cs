@@ -9,5 +9,5 @@ public class ScriptableTower : ScriptableObject
     public int towerCost;
     public Vector2Int size = Vector2Int.one;
     public BaseTower towerPrefab;
-    public float fireRate, damage, rotationSpeed, range;
+    public float fireRate, ammoDamage, ammoSpeed, rotationSpeed, range;
 }

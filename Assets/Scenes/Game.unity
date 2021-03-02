@@ -1319,8 +1319,8 @@ MonoBehaviour:
   endPoint: {fileID: 2147133558}
   forceDirections: []
   spawnTime: 0
-  spawnInterval: 1.2
-  maxEnemies: 50
+  spawnInterval: 0.4
+  maxEnemies: 500
   maxEnemyLevel: 1
 --- !u!4 &535659413
 Transform:
@@ -7478,7 +7478,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 000000006d320bea170c3a27d941a480
+  m_ApplyToSortingLayers: 000000006d320bea170c3a276db22981d941a480
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
