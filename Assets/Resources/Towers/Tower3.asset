@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Ice Arrow Tower
   towerCost: 1750
-  size: {x: 1, y: 1}
+  size: {x: 4, y: 1}
   towerPrefab: {fileID: 0}

@@ -47,7 +47,7 @@ public static GridManager instance;
 
     public Vector3 IndicatorPosition(Vector3Int cellPos)
     {
-        return bgMap.GetCellCenterWorld(cellPos);
+        return bgMap.CellToWorld(cellPos);
     }
 
     public Vector3Int WorldToRoadCell(Vector3 worldPos)
