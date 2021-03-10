@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Ammo : MonoBehaviour
 {
-    public Transform target;
+    [HideInInspector] public Transform target;
     [HideInInspector] public float speed, damage;
     private Vector3 currentDirection;
+    [SerializeField] private SpecialEffect specialEffect;
 
     private void Update()
     {
@@ -20,8 +21,14 @@ public class Ammo : MonoBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            EnemyManager.instance.TakeDamage(collision.gameObject.GetComponent<Enemy>(), damage);
+            EnemyManager.instance.TakeDamage(collision.gameObject.GetComponent<Enemy>(), damage, specialEffect);
             Destroy(gameObject);
         }
     }
+}
+
+public enum SpecialEffect
+{
+    None,
+    Freeze
 }

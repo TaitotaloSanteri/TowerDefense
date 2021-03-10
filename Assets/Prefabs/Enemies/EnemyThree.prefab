@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6053573610399852663}
   - component: {fileID: 4360165035037595840}
   m_Layer: 8
-  m_Name: EnemyTwo
+  m_Name: EnemyThree
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -368364947
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 03293ac44527f1f4ebcad88fbc32a950, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 927c5dfe40d41da4d82cbfacd3a036a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -147,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680266a1a755c12469d332e433e47922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
-  health: 15
-  moveSpeed: 4.5
+  level: 3
+  health: 20
+  moveSpeed: 7
   money: 350
   from: 0
   destination: {x: 0, y: 0, z: 0}

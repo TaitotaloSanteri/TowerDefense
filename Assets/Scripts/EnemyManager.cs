@@ -35,10 +35,18 @@ public class EnemyManager : MonoBehaviour
         endPointCell = GridManager.instance.WorldToRoadCell(GameStateManager.Instance.levelData.endPoint.position);
     }
 
-    public void TakeDamage(Enemy enemy, float damage)
+    public void TakeDamage(Enemy enemy, float damage, SpecialEffect effect)
     {
         if (!enemy) return; 
         enemy.health -= damage;
+        
+        switch (effect)
+        {
+            case SpecialEffect.Freeze:
+                enemy.moveSpeed *= 0.5f;
+                break;
+        }
+
         if (enemy.health <= 0)
         {
             GameStateManager.Instance.UpdateMoney(enemy.money);
@@ -91,8 +99,30 @@ public class EnemyManager : MonoBehaviour
         {
             GameStateManager.Instance.levelData.spawnTime = Time.time + GameStateManager.Instance.levelData.currentWave.spawnInterval;
             GameStateManager.Instance.levelData.currentWave.maxEnemies--;
-            int index = UnityEngine.Random.Range(0, enemies.Length);
-            Enemy enemy = Instantiate(enemies[index], GameStateManager.Instance.levelData.spawnPoint.position, Quaternion.identity);
+
+            // Etsitään kaikista vihollista ne viholliset, joiden level menee tämän hetkisen
+            // waven minimi ja maksimi levelin väliin
+
+            // Funktionaalinen ohjelmointi esimerkki (C# lambda expression)
+
+            Enemy[] spawnableEnemies = Array.FindAll(enemies, enemyA => enemyA.level >= GameStateManager.Instance.levelData.currentWave.minEnemyLevel &&
+            enemyA.level <= GameStateManager.Instance.levelData.currentWave.maxEnemyLevel);
+
+            // Perinteinen for-loop tapa tehdä sama asia
+
+            //List<Enemy> spawnableEnemies = new List<Enemy>();
+            //for (int i = 0; i < enemies.Length; i++)
+            //{
+            //    if (enemies[i].level >= GameStateManager.Instance.levelData.currentWave.minEnemyLevel
+            //        && enemies[i].level <= GameStateManager.Instance.levelData.currentWave.maxEnemyLevel)
+            //    {
+            //        spawnableEnemies.Add(enemies[i]);
+            //    }
+            //}
+
+
+            int index = UnityEngine.Random.Range(0, spawnableEnemies.Length);
+            Enemy enemy = Instantiate(spawnableEnemies[index], GameStateManager.Instance.levelData.spawnPoint.position, Quaternion.identity);
             activeEnemies.Add(enemy);
             SetDestination(enemy);
         }

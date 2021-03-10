@@ -1117,6 +1117,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 4360165035037595840, guid: 7a002e4df3baa1e459b67900503479ab, type: 3}
   - {fileID: 4360165035037595840, guid: e9d31543ead280743aec4b32169dad3d, type: 3}
+  - {fileID: 4360165035037595840, guid: 0f1810d8e9b481b458dcb1a002cbbdec, type: 3}
 --- !u!4 &464260743
 Transform:
   m_ObjectHideFlags: 0
@@ -1457,15 +1458,23 @@ MonoBehaviour:
   - totalBuildingTime: 10
     spawnInterval: 2
     maxEnemies: 5
+    minEnemyLevel: 1
     maxEnemyLevel: 1
   - totalBuildingTime: 15
     spawnInterval: 1.7
     maxEnemies: 10
+    minEnemyLevel: 1
     maxEnemyLevel: 2
+  - totalBuildingTime: 15
+    spawnInterval: 1.6
+    maxEnemies: 15
+    minEnemyLevel: 2
+    maxEnemyLevel: 3
   currentWave:
     totalBuildingTime: 0
     spawnInterval: 0
     maxEnemies: 0
+    minEnemyLevel: 0
     maxEnemyLevel: 0
 --- !u!4 &535659413
 Transform:
@@ -1515,7 +1524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: 0
   playerData:
-    money: 1000
+    money: 5000
   levelData: {fileID: 535659412}
 --- !u!4 &778109903
 Transform:

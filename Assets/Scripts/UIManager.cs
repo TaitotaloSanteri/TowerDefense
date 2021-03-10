@@ -33,15 +33,15 @@ public class UIManager : MonoBehaviour
         scriptableTowers = Resources.LoadAll<ScriptableTower>("Towers");
         // Luodaan jokaista tornia varten oma nappulansa
         towerButtons = new TowerButton[scriptableTowers.Length];
-        float xPosition = buttonStart.position.x;
-        float yPosition = buttonStart.position.y;
-        float spacing = 50f;
+        float xPosition = buttonStart.GetComponent<RectTransform>().anchoredPosition.x;
+        float yPosition = buttonStart.GetComponent<RectTransform>().anchoredPosition.y;
+        float spacing = 100f;
         for (int i = 0; i < towerButtons.Length; i++)
         {
             towerButtons[i] = Instantiate(towerButtonPrefab, transform);
             towerButtons[i].towerName.text = scriptableTowers[i].towerName;
             towerButtons[i].towerCost.text = $"${scriptableTowers[i].towerCost}";
-            towerButtons[i].transform.position = new Vector3(xPosition, yPosition - (i * spacing), 0f);
+            towerButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(xPosition, yPosition - (i * spacing));
         }
     }
 

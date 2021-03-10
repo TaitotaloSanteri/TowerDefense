@@ -14,5 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerName: Ice Arrow Tower
   towerCost: 1750
-  size: {x: 4, y: 1}
-  towerPrefab: {fileID: 0}
+  size: {x: 2, y: 2}
+  towerPrefab: {fileID: 392392926972175973, guid: 8fe67c175d92d22488474d75e23c745b,
+    type: 3}
+  fireRate: 1.5
+  ammoDamage: 2
+  ammoSpeed: 15
+  rotationSpeed: 5
+  range: 12
