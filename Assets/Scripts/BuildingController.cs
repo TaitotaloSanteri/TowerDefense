@@ -60,8 +60,11 @@ public class BuildingController : MonoBehaviour
         }
 
 
-        if (currentlySelectedTower.towerPrefab == null)
+        if (currentlySelectedTower.towerPrefab == null ||
+            GameStateManager.Instance.playerData.money < currentlySelectedTower.towerCost)
+        {
             return;
+        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -77,6 +80,7 @@ public class BuildingController : MonoBehaviour
                     hasBuilding[check.x, check.y] = true;
                 }
             }
+            GameStateManager.Instance.UpdateMoney(-currentlySelectedTower.towerCost);
         }
 
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy: MonoBehaviour
 {
     public float level, health, moveSpeed;
+    public int money;
     // Pidetään yllä tietoa, _mistä_ suunnasta ollaan kävelemässä
     [HideInInspector] public Direction from;
     // Pidetään yllä tietoa, _mihin_ suuntaan ollaan kävelemässä

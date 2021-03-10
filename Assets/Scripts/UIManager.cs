@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     private static ScriptableTower[] scriptableTowers;
     private static TowerButton[] towerButtons;
     [SerializeField] private Transform buttonStart;
-    [SerializeField] private TextMeshProUGUI moneyText, timeText;
+    [SerializeField] public TextMeshProUGUI moneyText, timeText;
     public static TowerButton currentlySelectedTowerButton;
     public static bool isPointerOnUI;
     // Singleton
@@ -50,6 +50,11 @@ public class UIManager : MonoBehaviour
         isPointerOnUI = EventSystem.current.IsPointerOverGameObject();
     }
 
+    public void UpdateTimeText(float time)
+    {
+        timeText.text = $"{time:00}";
+    }
+
     private static ScriptableTower GetTower(TowerButton button)
     {
         for (int i = 0; i < scriptableTowers.Length; i++)
@@ -76,6 +81,22 @@ public class UIManager : MonoBehaviour
         BuildingController.currentlySelectedTower = GetTower(button);
     }
   
+    public void UpdateMoneyUI()
+    {
+        moneyText.text = $"{GameStateManager.Instance.playerData.money}€";
+        for (int i = 0; i < towerButtons.Length; i++)
+        {
+            towerButtons[i].interactable = GameStateManager.Instance.playerData.money >=
+                                           scriptableTowers[i].towerCost; 
+        }
+        if (currentlySelectedTowerButton != null && !currentlySelectedTowerButton.interactable)
+        {
+            currentlySelectedTowerButton.image.color = currentlySelectedTowerButton.colors.normalColor;
+            currentlySelectedTowerButton = null;
+            BuildingController.currentlySelectedTower = null;
+        }
+       
+    }
 
 }
 

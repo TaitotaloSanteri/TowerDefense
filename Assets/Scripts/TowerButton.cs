@@ -14,6 +14,7 @@ public class TowerButton : Button
     public override void OnDeselect(BaseEventData eventData){}
     public override void OnPointerClick(PointerEventData eventData)
     {
+        if (!interactable) return;
         base.OnPointerClick(eventData);
         UIManager.SetCurrentlySelectedTowerButton(this);
     }

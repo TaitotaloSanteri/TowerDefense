@@ -148,7 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  health: 10
-  moveSpeed: 10
+  health: 5
+  moveSpeed: 8.5
+  money: 250
   from: 0
   destination: {x: 0, y: 0, z: 0}

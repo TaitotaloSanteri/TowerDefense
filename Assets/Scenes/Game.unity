@@ -1182,7 +1182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1453,10 +1453,20 @@ MonoBehaviour:
   endPoint: {fileID: 2147133558}
   forceDirections: []
   spawnTime: 0
-  totalBuildingTime: 30
-  spawnInterval: 0.4
-  maxEnemies: 500
-  maxEnemyLevel: 1
+  waves:
+  - totalBuildingTime: 10
+    spawnInterval: 2
+    maxEnemies: 5
+    maxEnemyLevel: 1
+  - totalBuildingTime: 15
+    spawnInterval: 1.7
+    maxEnemies: 10
+    maxEnemyLevel: 2
+  currentWave:
+    totalBuildingTime: 0
+    spawnInterval: 0
+    maxEnemies: 0
+    maxEnemyLevel: 0
 --- !u!4 &535659413
 Transform:
   m_ObjectHideFlags: 0
@@ -1506,6 +1516,7 @@ MonoBehaviour:
   gameState: 0
   playerData:
     money: 1000
+  levelData: {fileID: 535659412}
 --- !u!4 &778109903
 Transform:
   m_ObjectHideFlags: 0
@@ -8117,7 +8128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

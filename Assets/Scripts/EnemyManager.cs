@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Enemy[] enemies;
-    private LevelData levelData;
     private Vector3Int endPointCell;
     // Käytetään tätä hakemaan menosuunnan vastainen suunta, jota
     // sitten käytetään vihollisen kohdalla tulosuuntana.
@@ -33,8 +32,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void Start()
     {
-        levelData = FindObjectOfType<LevelData>();
-        endPointCell = GridManager.instance.WorldToRoadCell(levelData.endPoint.position);
+        endPointCell = GridManager.instance.WorldToRoadCell(GameStateManager.Instance.levelData.endPoint.position);
     }
 
     public void TakeDamage(Enemy enemy, float damage)
@@ -43,6 +41,7 @@ public class EnemyManager : MonoBehaviour
         enemy.health -= damage;
         if (enemy.health <= 0)
         {
+            GameStateManager.Instance.UpdateMoney(enemy.money);
             activeEnemies.Remove(enemy);
             Destroy(enemy.gameObject);
         }
@@ -50,8 +49,19 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameStateManager.Instance.gameState == GameState.BUILDING)
+        {
+            return;
+        }
         // Katsotaan onko mahdollista spawnata uusi vihollinen
         SpawnEnemies();
+
+        if (GameStateManager.Instance.levelData.currentWave.maxEnemies == 0 &&
+            activeEnemies.Count == 0)
+        {
+            GameStateManager.Instance.ChangeState(GameState.BUILDING);
+        }
+
         // Käydään kaikki viholliset läpi, jotka ovat vielä elossa
         for (int i = 0; i < activeEnemies.Count; i++)
         {
@@ -71,18 +81,18 @@ public class EnemyManager : MonoBehaviour
     private void SpawnEnemies()
     {
         // Jos maksimäärä vihollisia on spawnattu, niin ei spawnata niitä enempää
-        if (levelData.maxEnemies <= 0)
+        if (GameStateManager.Instance.levelData.currentWave.maxEnemies <= 0)
         {
             return;
         }
         // Jos edellisestä spawnista on kulunut spawnIntervalin määrämä aika,
         // niin spawnataan uusi vihollinen.
-        if (Time.time >= levelData.spawnTime)
+        if (Time.time >= GameStateManager.Instance.levelData.spawnTime)
         {
-            levelData.spawnTime = Time.time + levelData.spawnInterval;
-            levelData.maxEnemies--;
+            GameStateManager.Instance.levelData.spawnTime = Time.time + GameStateManager.Instance.levelData.currentWave.spawnInterval;
+            GameStateManager.Instance.levelData.currentWave.maxEnemies--;
             int index = UnityEngine.Random.Range(0, enemies.Length);
-            Enemy enemy = Instantiate(enemies[index], levelData.spawnPoint.position, Quaternion.identity);
+            Enemy enemy = Instantiate(enemies[index], GameStateManager.Instance.levelData.spawnPoint.position, Quaternion.identity);
             activeEnemies.Add(enemy);
             SetDestination(enemy);
         }
@@ -104,7 +114,7 @@ public class EnemyManager : MonoBehaviour
         // Jos vihollisen tämän hetkisen ruudun kohdalla on "ForceDirection" komponentti,
         // annetaan ForceDirectionin määrätä suunta. Tämä sitä varten, että vältetään
         // vihollisten tyhmä käyttäytyminen.
-        foreach (ForceDirection fd in levelData.forceDirections)
+        foreach (ForceDirection fd in GameStateManager.Instance.levelData.forceDirections)
         {
             if (cell == fd.cellPosition)
             {
