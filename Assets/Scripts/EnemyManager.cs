@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Enemy[] enemies;
     private Vector3Int endPointCell;
+    [SerializeField] private GameObject explosionPrefab;
     // Käytetään tätä hakemaan menosuunnan vastainen suunta, jota
     // sitten käytetään vihollisen kohdalla tulosuuntana.
     private Dictionary<Direction, Direction> ReverseDirection
@@ -39,7 +40,9 @@ public class EnemyManager : MonoBehaviour
     {
         if (!enemy) return; 
         enemy.health -= damage;
-        
+
+        Instantiate(explosionPrefab, enemy.transform.position, Quaternion.identity);
+
         switch (effect)
         {
             case SpecialEffect.Freeze:
@@ -137,6 +140,7 @@ public class EnemyManager : MonoBehaviour
         {
             activeEnemies.Remove(enemy);
             Destroy(enemy.gameObject);
+            GameStateManager.Instance.UpdateLives(-1);
         }
 
         // Päivitetään liikkumissuunta

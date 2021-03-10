@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     private static ScriptableTower[] scriptableTowers;
     private static TowerButton[] towerButtons;
     [SerializeField] private Transform buttonStart;
-    [SerializeField] public TextMeshProUGUI moneyText, timeText;
+    [SerializeField] public TextMeshProUGUI moneyText, timeText, livesText;
     public static TowerButton currentlySelectedTowerButton;
     public static bool isPointerOnUI;
     // Singleton
@@ -81,6 +81,11 @@ public class UIManager : MonoBehaviour
         BuildingController.currentlySelectedTower = GetTower(button);
     }
   
+    public void UpdateLivesUI()
+    {
+        livesText.text = $"Lives: {GameStateManager.Instance.playerData.lives}";
+    }
+
     public void UpdateMoneyUI()
     {
         moneyText.text = $"{GameStateManager.Instance.playerData.money}€";

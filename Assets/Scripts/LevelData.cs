@@ -39,5 +39,6 @@ public class Wave
     public float totalBuildingTime;
     public float spawnInterval;
     public int maxEnemies, minEnemyLevel, maxEnemyLevel;
+    public int bonusMoney;
 }
 

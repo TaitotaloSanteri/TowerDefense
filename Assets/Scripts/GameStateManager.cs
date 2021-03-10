@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameStateManager : MonoBehaviour
     private void Start()
     {
         UIManager.Instance.UpdateMoneyUI();
+        UIManager.Instance.UpdateLivesUI();
         ChangeState(GameState.BUILDING);
     }
 
@@ -44,6 +46,18 @@ public class GameStateManager : MonoBehaviour
     {
         playerData.money += cost;
         UIManager.Instance.UpdateMoneyUI();
+    }
+
+    public void UpdateLives(int value)
+    {
+        playerData.lives += value;
+        if (playerData.lives <= 0)
+        {
+            Debug.Log("Elämät loppui");
+            SceneManager.LoadScene(0);
+        }
+        UIManager.Instance.UpdateLivesUI();
+
     }
 
     public void ChangeState(GameState newState)
