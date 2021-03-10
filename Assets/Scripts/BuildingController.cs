@@ -59,6 +59,10 @@ public class BuildingController : MonoBehaviour
             }
         }
 
+
+        if (currentlySelectedTower.towerPrefab == null)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             BaseTower tower = 

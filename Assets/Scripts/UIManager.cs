@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,9 +11,11 @@ public class UIManager : MonoBehaviour
     private static ScriptableTower[] scriptableTowers;
     private static TowerButton[] towerButtons;
     [SerializeField] private Transform buttonStart;
-
+    [SerializeField] private TextMeshProUGUI moneyText, timeText;
     public static TowerButton currentlySelectedTowerButton;
     public static bool isPointerOnUI;
+    // Singleton
+    public static UIManager Instance;
 
     private void OnValidate()
     {
@@ -21,6 +24,10 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         // Etsitään kaikki ScriptableTower -tyyppiset assetit hakemistosta
         // Resources/Towers/
         scriptableTowers = Resources.LoadAll<ScriptableTower>("Towers");
